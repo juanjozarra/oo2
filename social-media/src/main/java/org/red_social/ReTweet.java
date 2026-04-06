@@ -1,10 +1,9 @@
 package org.red_social;
 
-public class ReTweet extends Tweet{
+public class ReTweet{
     private final Tweet original;
 
     public ReTweet(Tweet original) {
-        super(original.getText());
         this.original = original;
     }
 

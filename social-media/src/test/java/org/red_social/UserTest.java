@@ -21,8 +21,9 @@ public class UserTest {
         Tweet original = new Tweet("Another tweet");
         user.doReTweet(original);
 
-        assertEquals(2, user.getTweets().size());
+        assertEquals(1, user.getTweets().size());
         assertEquals("First tweet", user.getTweets().get(0).getText());
-        assertTrue(user.getTweets().get(1) instanceof ReTweet);
+        assertNotNull(user.getRetweets().get(0));
+        assertEquals("Another tweet", user.getRetweets().get(0).getOriginal().getText());
     }
 }

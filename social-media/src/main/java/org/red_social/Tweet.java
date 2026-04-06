@@ -1,10 +1,8 @@
 package org.red_social;
 
-import java.util.Date;
 
 public class Tweet {
-    private String text;
-    private Date date;
+    private final String text;
 
     public Tweet(String text) {
         if(text == null || text.isBlank())
@@ -14,7 +12,6 @@ public class Tweet {
             throw new IllegalArgumentException("Text cannot be longer than 280 characters");
         }
         this.text = text;
-        this.date = new Date();
     }
 
     public String getText() {

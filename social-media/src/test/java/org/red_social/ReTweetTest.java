@@ -19,6 +19,6 @@ public class ReTweetTest {
         Tweet original = new Tweet("Original message");
         ReTweet retweet = new ReTweet(original);
 
-        assertEquals("Original message", retweet.getText());
+        assertEquals("Original message", retweet.getOriginal().getText());
     }
 }

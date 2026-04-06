@@ -6,10 +6,12 @@ import java.util.List;
 public class User {
     private String screenName;
     private List<Tweet> tweets;
+    private List<ReTweet> retweets;
 
     public User(String screenName){
         this.screenName = screenName;
         this.tweets = new ArrayList<Tweet>();
+        this.retweets = new ArrayList<ReTweet>();
     }
 
     public String getScreenName() {
@@ -20,12 +22,16 @@ public class User {
         return tweets;
     }
 
+    public List<ReTweet> getRetweets() {
+        return retweets;
+    }
+
     public void postTweet(String text){
         tweets.add(new Tweet(text));
     }
 
     public void doReTweet(Tweet tweet){
-        tweets.add(new ReTweet(tweet));
+        retweets.add(new ReTweet(tweet));
     }
 
 }
