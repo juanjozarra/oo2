@@ -6,7 +6,7 @@ public class Rock extends BaseOption {
 
     public Rock() {
         this.name = "rock";
-        this.winsTo = List.of("scissor", "lizzard");
+        this.winsTo = List.of("scissor", "lizard");
     }
 
 }
