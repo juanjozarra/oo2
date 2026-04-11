@@ -1,13 +1,35 @@
 package org.example.options;
 
 
-import java.util.List;
-
 public class Scissor extends BaseOption {
 
-    public Scissor() {
-        this.name = "scissor";
-        this.winsTo = List.of("papper", "lizard");
+    @Override
+    public String vs(BaseOption option) {
+        return option.playVsScissor();
     }
 
+    @Override
+    public String playVsStone() {
+        return "Stone";
+    }
+
+    @Override
+    public String playVsScissor() {
+        return "Draw";
+    }
+
+    @Override
+    public String playVsLizard() {
+        return "Scissor";
+    }
+
+    @Override
+    public String playVsSpock() {
+        return "Spock";
+    }
+
+    @Override
+    public String playVsPapper() {
+        return "Scissor";
+    }
 }

@@ -1,29 +1,22 @@
 package org.example;
 
-import org.example.options.Lizard;
-import org.example.options.Option;
-import org.example.options.Papper;
-import org.example.options.Rock;
-import org.example.options.Scissor;
-import org.example.options.Spock;
+import org.example.options.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GameTest {
 
-    private Option rock;
-    private Option papper;
-    private Option scissor;
-    private Option lizard;
-    private Option spock;
+    private BaseOption stone;
+    private BaseOption papper;
+    private BaseOption scissor;
+    private BaseOption lizard;
+    private BaseOption spock;
 
     @BeforeEach
     public void setUp() {
-        rock = new Rock();
+        stone = new Stone();
         papper = new Papper();
         scissor = new Scissor();
         lizard = new Lizard();
@@ -31,53 +24,53 @@ public class GameTest {
     }
 
     @Test
-    public void testRockWins() {
-        assertTrue(rock.winsTo(scissor));
-        assertTrue(rock.winsTo(lizard));
-        assertFalse(rock.winsTo(papper));
-        assertFalse(rock.winsTo(spock));
-        assertFalse(rock.winsTo(rock));
+    public void testStoneWins() {
+        assertEquals("Stone", stone.vs(scissor));
+        assertEquals("Stone", stone.vs(lizard));
+        assertEquals("Papper", stone.vs(papper));
+        assertEquals("Spock", stone.vs(spock));
+        assertEquals("Draw", stone.vs(stone));
     }
 
     @Test
     public void testPapperWins() {
-        assertTrue(papper.winsTo(rock));
-        assertTrue(papper.winsTo(spock));
-        assertFalse(papper.winsTo(scissor));
-        assertFalse(papper.winsTo(lizard));
-        assertFalse(papper.winsTo(papper));
+        assertEquals("Papper", papper.vs(stone));
+        assertEquals("Papper", papper.vs(spock));
+        assertEquals("Scissor", papper.vs(scissor));
+        assertEquals("Lizard", papper.vs(lizard));
+        assertEquals("Draw", papper.vs(papper));
     }
 
     @Test
     public void testScissorWins() {
-        assertTrue(scissor.winsTo(papper));
-        assertTrue(scissor.winsTo(lizard));
-        assertFalse(scissor.winsTo(rock));
-        assertFalse(scissor.winsTo(spock));
-        assertFalse(scissor.winsTo(scissor));
+        assertEquals("Scissor", scissor.vs(papper));
+        assertEquals("Scissor", scissor.vs(lizard));
+        assertEquals("Stone", scissor.vs(stone));
+        assertEquals("Spock", scissor.vs(spock));
+        assertEquals("Draw", scissor.vs(scissor));
     }
 
     @Test
     public void testLizardWins() {
-        assertTrue(lizard.winsTo(papper));
-        assertTrue(lizard.winsTo(spock));
-        assertFalse(lizard.winsTo(rock));
-        assertFalse(lizard.winsTo(scissor));
-        assertFalse(lizard.winsTo(lizard));
+        assertEquals("Lizard", lizard.vs(papper));
+        assertEquals("Lizard", lizard.vs(spock));
+        assertEquals("Stone", lizard.vs(stone));
+        assertEquals("Scissor", lizard.vs(scissor));
+        assertEquals("Draw", lizard.vs(lizard));
     }
 
     @Test
     public void testSpockWins() {
-        assertTrue(spock.winsTo(rock));
-        assertTrue(spock.winsTo(scissor));
-        assertFalse(spock.winsTo(papper));
-        assertFalse(spock.winsTo(lizard));
-        assertFalse(spock.winsTo(spock));
+        assertEquals("Spock", spock.vs(stone));
+        assertEquals("Spock", spock.vs(scissor));
+        assertEquals("Papper", spock.vs(papper));
+        assertEquals("Lizard", spock.vs(lizard));
+        assertEquals("Draw", spock.vs(spock));
     }
 
     @Test
     public void testGamePlayDraw() {
-        assertEquals("Draw", Game.playGame(rock, rock));
+        assertEquals("Draw", Game.playGame(stone, stone));
         assertEquals("Draw", Game.playGame(papper, papper));
         assertEquals("Draw", Game.playGame(scissor, scissor));
         assertEquals("Draw", Game.playGame(lizard, lizard));
@@ -86,38 +79,38 @@ public class GameTest {
 
     @Test
     public void testGamePlayPlayer1Wins() {
-        assertEquals("Player 1 win with: rock", Game.playGame(rock, scissor));
-        assertEquals("Player 1 win with: rock", Game.playGame(rock, lizard));
-        
-        assertEquals("Player 1 win with: papper", Game.playGame(papper, rock));
-        assertEquals("Player 1 win with: papper", Game.playGame(papper, spock));
-        
-        assertEquals("Player 1 win with: scissor", Game.playGame(scissor, papper));
-        assertEquals("Player 1 win with: scissor", Game.playGame(scissor, lizard));
-        
-        assertEquals("Player 1 win with: lizard", Game.playGame(lizard, papper));
-        assertEquals("Player 1 win with: lizard", Game.playGame(lizard, spock));
-        
-        assertEquals("Player 1 win with: spock", Game.playGame(spock, rock));
-        assertEquals("Player 1 win with: spock", Game.playGame(spock, scissor));
+        assertEquals("Stone", Game.playGame(stone, scissor));
+        assertEquals("Stone", Game.playGame(stone, lizard));
+
+        assertEquals("Papper", Game.playGame(papper, stone));
+        assertEquals("Papper", Game.playGame(papper, spock));
+
+        assertEquals("Scissor", Game.playGame(scissor, papper));
+        assertEquals("Scissor", Game.playGame(scissor, lizard));
+
+        assertEquals("Lizard", Game.playGame(lizard, papper));
+        assertEquals("Lizard", Game.playGame(lizard, spock));
+
+        assertEquals("Spock", Game.playGame(spock, stone));
+        assertEquals("Spock", Game.playGame(spock, scissor));
     }
 
     @Test
     public void testGamePlayPlayer2Wins() {
-        // Player 2 wins when Player 1 plays an option that loses to Player 2
-        assertEquals("Player 2 win with: papper", Game.playGame(rock, papper));
-        assertEquals("Player 2 win with: spock", Game.playGame(rock, spock));
-        
-        assertEquals("Player 2 win with: scissor", Game.playGame(papper, scissor));
-        assertEquals("Player 2 win with: lizard", Game.playGame(papper, lizard));
-        
-        assertEquals("Player 2 win with: rock", Game.playGame(scissor, rock));
-        assertEquals("Player 2 win with: spock", Game.playGame(scissor, spock));
-        
-        assertEquals("Player 2 win with: rock", Game.playGame(lizard, rock));
-        assertEquals("Player 2 win with: scissor", Game.playGame(lizard, scissor));
-        
-        assertEquals("Player 2 win with: papper", Game.playGame(spock, papper));
-        assertEquals("Player 2 win with: lizard", Game.playGame(spock, lizard));
+        // Player 2 wins when Player 1 plays an BaseOption that loses to Player 2
+        assertEquals("Papper", Game.playGame(stone, papper));
+        assertEquals("Spock", Game.playGame(stone, spock));
+
+        assertEquals("Scissor", Game.playGame(papper, scissor));
+        assertEquals("Lizard", Game.playGame(papper, lizard));
+
+        assertEquals("Stone", Game.playGame(scissor, stone));
+        assertEquals("Spock", Game.playGame(scissor, spock));
+
+        assertEquals("Stone", Game.playGame(lizard, stone));
+        assertEquals("Scissor", Game.playGame(lizard, scissor));
+
+        assertEquals("Papper", Game.playGame(spock, papper));
+        assertEquals("Lizard", Game.playGame(spock, lizard));
     }
 }

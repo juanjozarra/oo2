@@ -1,14 +1,13 @@
 package org.example;
 
-import org.example.options.Option;
-import org.example.options.Rock;
-import org.example.options.Scissor;
+import org.example.options.BaseOption;
+import org.example.options.Stone;
 import org.example.options.Spock;
 
 public class Application {
     public static void main(String[] args) {
-        Option player1 = new Spock();
-        Option player2 = new Rock();
+        BaseOption player1 = new Spock();
+        BaseOption player2 = new Stone();
 
         System.out.print(Game.playGame(player1, player2));
     }

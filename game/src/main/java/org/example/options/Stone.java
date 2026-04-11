@@ -1,31 +1,32 @@
 package org.example.options;
 
 
-public class Spock extends BaseOption {
+public class Stone extends BaseOption {
+
 
     @Override
     public String vs(BaseOption option) {
-        return option.playVsSpock();
+        return option.playVsStone();
     }
 
     @Override
     public String playVsStone() {
-        return "Spock";
+        return "Draw";
     }
 
     @Override
     public String playVsScissor() {
-        return "Spock";
+        return "Stone";
     }
 
     @Override
     public String playVsLizard() {
-        return "Lizard";
+        return "Stone";
     }
 
     @Override
     public String playVsSpock() {
-        return "Draw";
+        return "Spock";
     }
 
     @Override

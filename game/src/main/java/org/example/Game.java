@@ -1,15 +1,9 @@
 package org.example;
 
-import org.example.options.Option;
+import org.example.options.BaseOption;
 
 public class Game {
-    public static String playGame(Option player1, Option player2) {
-        if(player1.getName().equals(player2.getName())) {
-            return "Draw";
-        }
-        if(player1.winsTo(player2)) {
-            return "Player 1 win with: " + player1.getName() ;
-        }
-        return "Player 2 win with: " + player2.getName();
+    public static String playGame(BaseOption player1, BaseOption player2) {
+        return player1.vs(player2);
     }
 }
