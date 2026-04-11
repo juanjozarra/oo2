@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private String screenName;
-    private List<Tweet> tweets;
-    private List<ReTweet> retweets;
+    private final String screenName;
+    private final List<Tweet> tweets;
+    private final List<ReTweet> retweets;
 
     public User(String screenName){
         this.screenName = screenName;
